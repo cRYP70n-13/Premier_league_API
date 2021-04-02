@@ -1,0 +1,36 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - premier-app:/usr/src/app
+      - /usr/src/app/node_modules
+    container_name: premier-league
+    restart: always
+    ports:
+      - 8080:8080
+      - 9229:9229
+    command: npm run dev
+    depends_on:
+      - mongo
+    networks:
+      - premier
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - database_mongo:/data/db
+    networks:
+      - premier
+
+volumes:
+  premier-app:
+  database_mongo:
+
+networks:
+  premier:
