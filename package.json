@@ -1,0 +1,61 @@
+{
+  "name": "Premier_league_API",
+  "version": "1.0.0",
+  "description": "Premier Leage API",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node ./api/index.js",
+	"test": "cross-env NODE_ENV=test jest --runInBand --testTimeout=20000",
+	"coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+	"start": "npm run build && node./dist/index.js",
+	"test:coverage": "jest --runInBand --coverage"
+  },
+  "jest": {
+	"testEnvironment": "node",
+	"coveragePathIgnorePatterns": [
+		"/node_modules/",
+		"/dist"
+	],
+	"verbose": true
+  },
+  "repository": {
+	  "type": "git",
+	  "url": "https://github.com/cRYP70n-13/Premier_league_API.git"
+  },
+  "keywords": [
+	  "NodeJS",
+	  "API"
+  ],
+  "author": "@cRYP70n-13",
+  "license": "ISC",
+  "bugs": {
+	  "url": "https://github.com/cRYP70n-13/Premier_league_API/issues"
+  },
+  "homepage": "https://github.com/cRYP70n-13/Premier_league_API#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "email-validator": "^2.0.4",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "loadsh": "^0.0.4",
+    "mongodb": "^3.6.5",
+    "mongoose": "^5.12.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/node": "^7.13.13",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/register": "^7.13.14",
+    "@babel/runtime": "^7.13.10",
+    "@shelf/jest-mongodb": "^1.2.3",
+    "babel-loader": "^8.2.2",
+    "coveralls": "^3.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.23.0",
+    "faker": "^5.5.2",
+    "jest": "^26.6.3",
+    "supertest": "^6.1.3"
+  }
+}
