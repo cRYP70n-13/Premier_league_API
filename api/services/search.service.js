@@ -182,6 +182,68 @@ class SearchService {
 			return homeAwayMatchDayFixture;
 		}
 	}
+
+	async searchHomeAndMatchTimeFixture(homeTeam, matchTime) {
+		const homes = await this.team.find({ 'name': { $regex: '.*' + homeTeam, $options: 'i' + '.*' }});
+
+		if (homes.length > 0) {
+			const homesId = [];
+
+			homes.map(team => homesId.push(team._id));
+
+			const homeMatchDayFixtures = await this.fixture.find({ home: { $in: homesId }, matchtime: matchTime })
+				.select('-admin')
+				.select('-__v')
+				.populate('home', '_id name')
+				.populate('away', '_id name')
+				.exec();
+
+			return homeMatchDayFixtures;
+		}
+	}
+
+	async searchHomeAndMatchDayFixture(homeTeam, matchDay) {
+		const homes = await this.team.find({ 'name': { $regex: '.*' + homeTeam, $options: 'i' + '.*' }});
+
+		if (homes.length > 0) {
+			const homesId = [];
+
+			homes.map(team => homesId.push(team._id));
+
+			const homeMatchDayFixtures = await this.fixture.find({ home: { $in: homesId }, matchday: matchDay })
+				.select('-admin')
+				.select('-__v')
+				.populate('home', '_id name')
+				.populate('away', '_id name')
+				.exec();
+
+			return homeMatchDayFixtures;
+		}
+	}
+
+	async searchHomeAndMatchDayFixture(matchday) {
+		const matchDays = await this.fixture.find({ matchday })
+			.select('-admin')
+			.select('-__v')
+			.populate('home', '_id name')
+			.populate('away', '_id name')
+			.exec();
+
+		return matchDays;
+	}
+
+	async searchMatchTimeFixture(matchtime) {
+		const matchTimes = await this.fixture.find({ matchtime })
+			.select('-admin')
+			.select('-__v')
+			.populate('home', '_id name')
+			.populate('away', '_id name')
+			.exec();
+
+		return matchTimes;
+	}
+
+	// TODO: Implement the rest of them line: 284 SearchHomeFixture() ...
 }
 
 export default SearchService;
