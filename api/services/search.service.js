@@ -243,7 +243,99 @@ class SearchService {
 		return matchTimes;
 	}
 
-	// TODO: Implement the rest of them line: 284 SearchHomeFixture() ...
+	async searchHomeFixture(homeTeam) {
+		const homes = await this.team.find({ 'name': { $regex: '.*' + homeTeam, $options: 'i' + '.*' }});
+
+		if (homes.length > 0) {
+			const homeIds = [];
+
+			homes.map(team => homeIds.push(team._id));
+
+			const homeFixtures = await this.fixture.find({ home: { $in: homeIds } })
+				.select('-admin')
+				.select('-__v')
+				.populate('home', '_id name')
+				.populate('away', '_id name')
+				.exec();
+
+			return homeFixtures;
+		}
+	}
+
+	async searchAwayFixture(awayTeam) {
+		const aways = await this.team.find({ 'name': { $regex: '.*' + awayTeam, $options: 'i' + '.*' }})
+
+		if (aways.length > 0) {
+			const awayIds = [];
+
+			aways.map(team => awayIds.push(team._id));
+
+			const awaysFixtures = this.fixture.find({ away: { $in: awayIds } })
+				.select('-admin')
+				.select('-__v')
+				.populate('home', '_id name')
+				.populate('away', '_id name')
+				.exec();
+
+			return awaysFixtures;
+		}
+	}
+
+	async searchHomeAndAwayFixture(homeTeam, awayTeam) {
+		const homeIds = await this._getHomesId(homeTeam);
+		const awayIds = await this._getAwaysId(awayTeam);
+
+		if (homeIds && awayIds) {
+			const fixtures = await this.fixture.find({ home: { $in: homeIds }, away: { $in: awayIds }})
+				.select('-admin')
+				.select('-__v')
+				.populate('home', '_id name')
+				.populate('away', '_id name')
+				.exec();
+
+			return fixtures;
+		}
+	}
+
+	async searchHomeAwayMatchDayAndMatchTimeFixture(homeTeam, awayTeam, matchDay, matchTime) {
+		const homeIds = await this._getHomesId(homeTeam);
+		const awayIds = await this._getAwaysId(awayTeam);
+
+		if (homeIds && awayIds) {
+			const fixtures = await this.fixture.find({ home: { $in: homeIds }, aways: { $in: awayIds }, matchday: matchDay, matchtime: matchTime })
+				.select('-admin')
+				.select('-__v')
+				.populate('home', '_id name')
+				.populate('away', '_id name')
+				.exec();
+
+			return fixtures;
+		}
+	}
+
+	async _getHomesId(homeTeam) {
+		const homes = await this.team.find({ 'name': { $regex: '.*' + homeTeam, $options: 'i' + '.*' }});
+
+		if (homes.length > 0) {
+			const homeIds = [];
+
+			homeIds.map(team => homeIds.push(team._id));
+
+			return homeIds;
+		}
+	}
+
+	async _getAwaysId(awayTeam) {
+		const aways = await this.team.find({ 'name': { $regex: '.*' + awayTeam, $options: 'i' + '.*' }});
+
+		if (aways.length > 0) {
+			const awayIds = [];
+
+			aways.map(team => awayIds.push(team._id));
+
+			return awayIds;
+		}
+	}
 }
 
 export default SearchService;
