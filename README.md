@@ -4,7 +4,7 @@
 
 Using SSH:
 ```
-git clone https://github.com/victorsteven/Premier-League.git
+git clone https://github.com/cRYP70n-13/Premier_league_API.git
 ```
 
 #### Change to the application directory:
