@@ -30,7 +30,7 @@ class LoginController {
 			return res.status(500).json({
 				status: 500,
 				success: false,
-				error: error.message
+				error: e.message
 			});
 		}
 	}

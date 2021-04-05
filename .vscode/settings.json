@@ -1,0 +1,4 @@
+{
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "terminal.integrated.fontFamily": "Hack Nerd Font"
+}
