@@ -1,6 +1,6 @@
 import validate from '../utils/validate';
 
-class SearchController {
+class SearchController { // localhost:8080/api/v1/searchteam
 	constructor(searchService) {
 		this.searchService = searchService;
 	}
@@ -71,7 +71,7 @@ class SearchController {
 			return res.status(500).json({
 				status: 500,
 				success: false,
-				error: e.message
+				error: error.message
 			});
 		}
 	}
