@@ -13,7 +13,7 @@ class FixtureController {
 
 	async createFixture(req, res) {
 		// NOTE: The token is already been set in the middleware attached to this route
-		const tokenMetadata = req.tokeMetadata;
+		const { tokenMetadata } = req;
 
 		if (!tokenMetadata) {
 			return res.status(401).json({
@@ -70,7 +70,7 @@ class FixtureController {
 
 	async updateFixture(req, res) {
 		// Check the token metadata of the one who sent the req is an admin or not
-		const tokenMetadata = req.tokenMetadata;
+		const { tokenMetadata } = req;
 
 		if (!tokenMetadata) {
 			return res.status(401).json({
@@ -140,7 +140,7 @@ class FixtureController {
 
 	async deleteFixture(req, res) {
 		// Check the token metadata
-		const tokenMetadata = req.tokenMetadata;
+		const { tokenMetadata } = req;
 
 		if (!tokenMetadata) {
 			return res.status(401).json({
@@ -195,7 +195,7 @@ class FixtureController {
 	async getFixture(req, res) {
 
 		//The tokenMetadata has already been set in the request when the middleware attached to this route got executed
-		const tokenMetadata = req.tokenMetadata;
+		const { tokenMetadata } = req;
 
 		if (!tokenMetadata) {
 			return res.status(401).json({
@@ -241,7 +241,7 @@ class FixtureController {
 	async getFixtures(req, res) {
 
 		//The tokenMetadata has already been set in the request when the middleware attached to this route ran
-		const tokenMetadata = req.tokenMetadata;
+		const { tokenMetadata } = req;
 
 		if (!tokenMetadata) {
 			return res.status(401).json({
@@ -268,7 +268,7 @@ class FixtureController {
 			return res.status(500).json({
 				status: 500,
 				success: false,
-				error: e.message
+				error: error.message
 			});
 		}
 	}
