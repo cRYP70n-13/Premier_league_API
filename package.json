@@ -5,31 +5,31 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec babel-node ./api/index.js",
-	"test": "cross-env NODE_ENV=test jest --runInBand --testTimeout=20000",
-	"coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-	"start": "npm run build && node./dist/index.js",
-	"test:coverage": "jest --runInBand --coverage"
+    "test": "cross-env NODE_ENV=test jest --runInBand --testTimeout=20000",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "start": "npm run build && node./dist/index.js",
+    "test:coverage": "jest --runInBand --coverage"
   },
   "jest": {
-	"testEnvironment": "node",
-	"coveragePathIgnorePatterns": [
-		"/node_modules/",
-		"/dist"
-	],
-	"verbose": true
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/dist"
+    ],
+    "verbose": true
   },
   "repository": {
-	  "type": "git",
-	  "url": "https://github.com/cRYP70n-13/Premier_league_API.git"
+    "type": "git",
+    "url": "https://github.com/cRYP70n-13/Premier_league_API.git"
   },
   "keywords": [
-	  "NodeJS",
-	  "API"
+    "NodeJS",
+    "API"
   ],
   "author": "@cRYP70n-13",
   "license": "ISC",
   "bugs": {
-	  "url": "https://github.com/cRYP70n-13/Premier_league_API/issues"
+    "url": "https://github.com/cRYP70n-13/Premier_league_API/issues"
   },
   "homepage": "https://github.com/cRYP70n-13/Premier_league_API#readme",
   "dependencies": {
@@ -47,6 +47,7 @@
     "@babel/core": "^7.13.14",
     "@babel/node": "^7.13.13",
     "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
     "@babel/register": "^7.13.14",
     "@babel/runtime": "^7.13.10",
     "@shelf/jest-mongodb": "^1.2.3",
