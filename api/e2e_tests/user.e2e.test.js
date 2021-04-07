@@ -28,13 +28,12 @@ afterAll(async () => {
 	await closeDatabase();
 });
 
-
 describe('User E2E', () => {
 	describe('POST /user', () => {
 		it('should create a user', async () => {
 			const user = {
-				name: 'victor',
-				email: 'victor@example.com',
+				name: 'cRYP70n-13',
+				email: 'otmane.kimdil@gmail.com',
 				password: 'password'
 			};
 			const res = await request
@@ -75,7 +74,7 @@ describe('User E2E', () => {
 		it('should not create a user if validation fails', async () => {
 			const user = {
 				name: '', //the name is required
-				email: 'victorexample.com', //invalid email
+				email: 'otmane.example.com', //invalid email
 				password: 'pass' //the password should be atleast 6 characters
 			};
 			const res = await request
